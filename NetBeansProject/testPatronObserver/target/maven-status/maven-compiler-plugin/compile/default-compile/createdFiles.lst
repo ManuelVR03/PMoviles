@@ -1,0 +1,5 @@
+com\mycompany\testpatronobserver\Producto.class
+com\mycompany\testpatronobserver\Main.class
+com\mycompany\testpatronobserver\Observable.class
+com\mycompany\testpatronobserver\Observer.class
+com\mycompany\testpatronobserver\Subscriptor.class
