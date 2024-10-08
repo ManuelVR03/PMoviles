@@ -8,6 +8,16 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/minutos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="'"
+        app:layout_constraintBaseline_toBaselineOf="@+id/igual"
+        app:layout_constraintEnd_toStartOf="@+id/igual"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/button0" />
+
+    <Button
         android:id="@+id/button6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -92,13 +102,11 @@
         android:id="@+id/button0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="110dp"
         android:text="0"
-        app:layout_constraintEnd_toStartOf="@+id/igual"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintBaseline_toBaselineOf="@+id/minutos"
+        app:layout_constraintEnd_toStartOf="@+id/minutos"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/grados" />
 
     <Button
         android:id="@+id/button1"
@@ -161,10 +169,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:text="="
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/minutos"
         app:layout_constraintTop_toBottomOf="@+id/resta" />
+
+    <Button
+        android:id="@+id/grados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="º"
+        app:layout_constraintBaseline_toBaselineOf="@+id/button0"
+        app:layout_constraintEnd_toStartOf="@+id/button0"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

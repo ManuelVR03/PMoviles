@@ -1,6 +1,7 @@
 package com.example.calculadora_mv
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     //Logica de negocio. Hay que intentar siempre sacarla fuera de la vista
     lateinit var calculadora:Calculadora
 
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -62,7 +64,19 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         val botonCero: Button = findViewById<Button>(R.id.cero)
         botonCero.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
-               textView.text = ""+calculadora.reset()
+                textView.text = ""+calculadora.reset()
+            }
+        })
+        val botonGrados: Button = findViewById<Button>(R.id.grados)
+        botonCero.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                textView.text = textView.text.toString() + "ª "
+            }
+        })
+        val botonMinutos: Button = findViewById<Button>(R.id.minutos)
+        botonCero.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(view: View?) {
+                textView.text = textView.text.toString() + "'"
             }
         })
         val botonIgual: Button = findViewById<Button>(R.id.igual)
