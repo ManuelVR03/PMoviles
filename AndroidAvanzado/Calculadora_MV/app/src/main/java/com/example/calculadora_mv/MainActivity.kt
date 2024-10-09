@@ -45,9 +45,10 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         val boton8 = (findViewById<Button>(R.id.button8)).setOnClickListener(this)
         val boton9 = (findViewById<Button>(R.id.button9)).setOnClickListener(this)
 
+
         //Resto de botones
 
-
+        /*
         //Los botones de operaciones, CE e igual, gestionan sus propios eventos
         val botonSuma: Button = findViewById<Button>(R.id.suma)
         botonSuma.setOnClickListener(object : View.OnClickListener {
@@ -61,38 +62,57 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                 textView.text = "" + calculadora.resuelveAddOperacion("resta")
             }
         })
+
+         */
+        /*
         val botonCero: Button = findViewById<Button>(R.id.cero)
         botonCero.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 textView.text = ""+calculadora.reset()
             }
         })
-        val botonGrados: Button = findViewById<Button>(R.id.grados)
-        botonCero.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                textView.text = textView.text.toString() + "ª "
-            }
-        })
-        val botonMinutos: Button = findViewById<Button>(R.id.minutos)
-        botonCero.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                textView.text = textView.text.toString() + "'"
-            }
-        })
+        */
+
+        /*
+
         val botonIgual: Button = findViewById<Button>(R.id.igual)
         botonIgual.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 textView.text = "" + calculadora.resuelveAddOperacion()
             }
         })
+         */
 
         //resto de operaciones
     }
 
     //La ventana gestiona el teclado numérico
+
+
+
     override fun onClick(p0: View?) {
         val boton = p0 as Button
-        val n = (boton.text).toString().toDouble()
+        val n = (boton.text).toString().toInt()
+        if (calculadora.operacion == "" && calculadora.btnOperando == ""){
+            calculadora.grados = (calculadora.grados * 10) + n
+            textView.text = "" + calculadora.grados
+        }else if (calculadora.operacion == "" && calculadora.btnOperando == "ª"){
+            calculadora.minutos = (calculadora.minutos * 10) + n
+            textView.text = "" + calculadora.minutos
+        }else if (calculadora.operacion == "" && calculadora.btnOperando == "'"){
+            calculadora.segundos = (calculadora.segundos * 10) + n
+            textView.text = "" + calculadora.segundos
+        }else if (calculadora.btnOperando == ""){
+            calculadora.grados2 = (calculadora.grados2 * 10) + n
+            textView.text = "" + calculadora.grados2
+        }else if (calculadora.btnOperando == "ª"){
+            calculadora.minutos2 = (calculadora.minutos2 * 10) + n
+            textView.text = "" + calculadora.minutos2
+        }else{
+            calculadora.segundos2 = (calculadora.segundos2 * 10) + n
+            textView.text = "" + calculadora.segundos2
+        }
+        /*
         if (calculadora.operacion == "") {
             calculadora.operando1 = (calculadora.operando1 * 10) + n
             textView.text = "" + calculadora.operando1
@@ -100,6 +120,10 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             calculadora.operando2 = (calculadora.operando2 * 10) + n
             textView.text = "" + calculadora.operando2
         }
+        */
+
     }
+
+
 
 }
