@@ -1,7 +1,7 @@
 package com.example.calculadora_mv
 
 
-import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -13,14 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class MainActivity : AppCompatActivity(), OnClickListener {
+class MainActivity : AppCompatActivity() {
 
     lateinit var textView: TextView
 
     //Logica de negocio. Hay que intentar siempre sacarla fuera de la vista
     lateinit var calculadora:Calculadora
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -34,85 +33,55 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         calculadora=Calculadora()
         textView = findViewById<TextView>(R.id.textView)
 
-        val boton0 = (findViewById<Button>(R.id.button0)).setOnClickListener(this)
-        val boton1 = (findViewById<Button>(R.id.button1)).setOnClickListener(this)
-        val boton2 = (findViewById<Button>(R.id.button2)).setOnClickListener(this)
-        val boton3 = (findViewById<Button>(R.id.button3)).setOnClickListener(this)
-        val boton4 = (findViewById<Button>(R.id.button4)).setOnClickListener(this)
-        val boton5 = (findViewById<Button>(R.id.button5)).setOnClickListener(this)
-        val boton6 = (findViewById<Button>(R.id.button6)).setOnClickListener(this)
-        val boton7 = (findViewById<Button>(R.id.button7)).setOnClickListener(this)
-        val boton8 = (findViewById<Button>(R.id.button8)).setOnClickListener(this)
-        val boton9 = (findViewById<Button>(R.id.button9)).setOnClickListener(this)
+        val boton0 = (findViewById<Button>(R.id.button0)).setOnClickListener { gestionarClick(it) }
+        val boton1 = (findViewById<Button>(R.id.button1)).setOnClickListener { gestionarClick(it) }
+        val boton2 = (findViewById<Button>(R.id.button2)).setOnClickListener { gestionarClick(it) }
+        val boton3 = (findViewById<Button>(R.id.button3)).setOnClickListener { gestionarClick(it) }
+        val boton4 = (findViewById<Button>(R.id.button4)).setOnClickListener { gestionarClick(it) }
+        val boton5 = (findViewById<Button>(R.id.button5)).setOnClickListener { gestionarClick(it) }
+        val boton6 = (findViewById<Button>(R.id.button6)).setOnClickListener { gestionarClick(it) }
+        val boton7 = (findViewById<Button>(R.id.button7)).setOnClickListener { gestionarClick(it) }
+        val boton8 = (findViewById<Button>(R.id.button8)).setOnClickListener { gestionarClick(it) }
+        val boton9 = (findViewById<Button>(R.id.button9)).setOnClickListener { gestionarClick(it) }
 
-
-        //Resto de botones
-
-        /*
         //Los botones de operaciones, CE e igual, gestionan sus propios eventos
-        val botonSuma: Button = findViewById<Button>(R.id.suma)
-        botonSuma.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                textView.text = "" + calculadora.resuelveAddOperacion("suma")
-            }
-        })
-        val botonResta: Button = findViewById<Button>(R.id.resta)
-        botonResta.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                textView.text = "" + calculadora.resuelveAddOperacion("resta")
-            }
-        })
-
-         */
-        /*
-        val botonCero: Button = findViewById<Button>(R.id.cero)
-        botonCero.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                textView.text = ""+calculadora.reset()
-            }
-        })
-        */
-
-        /*
-
-        val botonIgual: Button = findViewById<Button>(R.id.igual)
-        botonIgual.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) {
-                textView.text = "" + calculadora.resuelveAddOperacion()
-            }
-        })
-         */
-
+        val botonSuma= (findViewById<Button>(R.id.suma)).setOnClickListener { gestionarClick(it) }
+        val botonResta=(findViewById<Button>(R.id.resta)).setOnClickListener { gestionarClick(it) }
+        val botonDivide=(findViewById<Button>(R.id.divide)).setOnClickListener { gestionarClick(it) }
+        val botonMultiplica=(findViewById<Button>(R.id.multiplica)).setOnClickListener { gestionarClick(it) }
+        val botonCuadrado=(findViewById<Button>(R.id.cuadrado)).setOnClickListener { gestionarClick(it) }
+        val botonRaizCuadrada=(findViewById<Button>(R.id.raizcuadrada)).setOnClickListener { gestionarClick(it) }
+        val botonIgual=(findViewById<Button>(R.id.igual)).setOnClickListener { gestionarClick(it) }
+        val botonCero=(findViewById<Button>(R.id.cero)).setOnClickListener { gestionarClick(it) }
         //resto de operaciones
+
+        //Botón a nueva Activity
+        val botonPantalla2=(findViewById<Button>(R.id.buttonPantalla2)).setOnClickListener {
+
+            intent=Intent (this, Activity2::class.java)
+            startActivity(intent)
+
+        }
+
+
+    }
+    private fun gestionarClick(view:View){
+        val boton= view as Button
+        val texto=boton.text.toString()
+        when(texto){
+            "0","1","2","3","4","5","6","7","8","9" -> procesarNumero(texto)
+            "+","-","X","/","^2","Raíz cuadrada" -> procesarOperacion(texto)
+            "=" -> textView.text = calculadora.resuelveAddOperacion()
+            "C" -> { calculadora.reset()
+                    textView.text = "0"}
+          }
     }
 
-    //La ventana gestiona el teclado numérico
-
-
-
-    override fun onClick(p0: View?) {
-        val boton = p0 as Button
-        val n = (boton.text).toString().toInt()
-        if (calculadora.operacion == "" && calculadora.btnOperando == ""){
-            calculadora.grados = (calculadora.grados * 10) + n
-            textView.text = "" + calculadora.grados
-        }else if (calculadora.operacion == "" && calculadora.btnOperando == "ª"){
-            calculadora.minutos = (calculadora.minutos * 10) + n
-            textView.text = "" + calculadora.minutos
-        }else if (calculadora.operacion == "" && calculadora.btnOperando == "'"){
-            calculadora.segundos = (calculadora.segundos * 10) + n
-            textView.text = "" + calculadora.segundos
-        }else if (calculadora.btnOperando == ""){
-            calculadora.grados2 = (calculadora.grados2 * 10) + n
-            textView.text = "" + calculadora.grados2
-        }else if (calculadora.btnOperando == "ª"){
-            calculadora.minutos2 = (calculadora.minutos2 * 10) + n
-            textView.text = "" + calculadora.minutos2
-        }else{
-            calculadora.segundos2 = (calculadora.segundos2 * 10) + n
-            textView.text = "" + calculadora.segundos2
-        }
-        /*
+    private fun procesarOperacion(texto: String) {
+        textView.text = calculadora.resuelveAddOperacion(texto)
+    }
+    private fun procesarNumero(texto: String) {
+        val n = texto.toDouble()
         if (calculadora.operacion == "") {
             calculadora.operando1 = (calculadora.operando1 * 10) + n
             textView.text = "" + calculadora.operando1
@@ -120,10 +89,7 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             calculadora.operando2 = (calculadora.operando2 * 10) + n
             textView.text = "" + calculadora.operando2
         }
-        */
-
     }
-
 
 
 }

@@ -13,10 +13,6 @@
         android:theme="@style/Theme.Calculadora_MV"
         tools:targetApi="31">
         <activity
-            android:name=".Activity2"
-            android:exported="false"
-            android:theme="@style/Theme.Calculadora_MV" />
-        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
