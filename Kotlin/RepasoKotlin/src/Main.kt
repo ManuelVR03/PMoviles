@@ -1,14 +1,48 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+    // Reprograma la funcion repeat para que haga lo mismo que la que está incorporada en kotlin
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+    val mascotas = arrayOf("Perro", "Gato", "Loro", "Hamster", "Cobaya")
+
+    // Recorrer el array con un bucle for
+    println("Bucle for")
+    for (i in mascotas.indices){
+        println(mascotas[i])
+    }
+    println()
+
+    // Recorrer el array con un bucle for each
+    println("Bucle for each")
+    for (mascota in mascotas){
+        println(mascota)
+    }
+    println()
+
+    // Recorrer el array con un bucle for indexes
+    println("Bucle for indexes")
+    for ((index, mascota) in mascotas.withIndex()) {
+        println("$index $mascota")
+    }
+    println()
+
+    // Recorrer el array con repeat
+    println("Repeat")
+    repeat(mascotas.size){
+        println(mascotas[it])
+    }
+    println()
+
+    // Recorrer el array con miRepeat
+    println("Mi Repeat")
+    fun miRepeat(i: Int, fn: (Int) -> Unit){
+        for (index in 0 until i){
+            fn(index)
+        }
+    }
+    miRepeat(mascotas.size){
+        println(mascotas[it])
+    }
+    println()
+    miRepeat(5){
+        println("Hola")
     }
 }
