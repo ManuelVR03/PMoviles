@@ -1,3 +1,4 @@
+// MainActivity.kt
 package com.example.calculadorajpc
 
 import android.os.Bundle
@@ -31,13 +32,12 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 }
 
 @Composable
 fun Main(name: String, modifier: Modifier = Modifier) {
-    var calculadora = Calculadora()
-    var texto1 by remember { mutableStateOf("0.0") }
+    val calculadora = Calculadora()
+    var texto1 by remember { mutableStateOf("0") }
 
     Column {
         Text(
@@ -67,7 +67,10 @@ fun CrearBoton(texto: String, onClick: () -> Unit) {
 private fun gestionarClick(texto: String, calculadora: Calculadora, texto1: String): String {
     return when (texto) {
         "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" -> procesarNumero(texto, calculadora)
-        "+", "-", "X", "/", "^2", "sqrt" -> calculadora.resuelveAddOperacion(texto)
+        "+", "-", "*", "/", "^2", "sqrt" -> {
+            calculadora.operacion = texto
+            texto1
+        }
         "=" -> calculadora.resuelveAddOperacion()
         "C" -> {
             calculadora.reset()
@@ -78,13 +81,11 @@ private fun gestionarClick(texto: String, calculadora: Calculadora, texto1: Stri
 }
 
 private fun procesarNumero(texto: String, calculadora: Calculadora): String {
-    val n = texto.toDouble()
-    return if (calculadora.operacion == "") {
-        calculadora.operando1 = (calculadora.operando1 * 10) + n
-        "" + calculadora.operando1
+    if (calculadora.operacion.isEmpty()) {
+        calculadora.operando1 = (calculadora.operando1 * 10) + texto.toDouble()
+        return calculadora.operando1.toString()
     } else {
-        calculadora.operando2 = (calculadora.operando2 * 10) + n
-        "" + calculadora.operando2
+        calculadora.operando2 = (calculadora.operando2 * 10) + texto.toDouble()
+        return calculadora.operando2.toString()
     }
 }
-
