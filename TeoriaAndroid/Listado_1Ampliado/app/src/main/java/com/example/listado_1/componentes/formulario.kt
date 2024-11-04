@@ -9,12 +9,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.os.persistableBundleOf
+import com.example.listado_1.modelo.Persona
 
 @Composable
-fun Formulario(lista: SnapshotStateList<String>,
+fun Formulario(lista: SnapshotStateList<Persona>,
                opciones: List<String>,
                seleccion: MutableState<String>,
                nombre: MutableState<String>,
@@ -38,7 +41,7 @@ fun Formulario(lista: SnapshotStateList<String>,
                 MiCheckBox(opciones2,checkedList)
                 Button(
                     onClick = {
-                        lista.add(nombre.value+ "  ${seleccion.value}")
+                        lista.add(Persona(nombre.value, seleccion.value, checkedList[0], checkedList[1]))
                         nombre.value=""
                     }
                 ) { Text(text = "Aceptar") } //Al hacer click se guarda ese nombre en el listado

@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.listado_1.componentes.Formulario
 import com.example.listado_1.componentes.Lista
+import com.example.listado_1.modelo.Persona
 import com.example.listado_1.ui.theme.Listado_1Theme
 
 class MainActivity : ComponentActivity() {
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Main(modifier: Modifier = Modifier) {
-    val personas = remember {mutableStateListOf<String>()}
+    val personas = remember {mutableStateListOf<Persona>()}
     var nombre = remember {mutableStateOf<String>("")}
     val opciones= listOf<String>("Hombre", "Mujer")
     var seleccion = remember {mutableStateOf<String>("Hombre")}
