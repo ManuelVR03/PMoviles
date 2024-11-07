@@ -43,6 +43,10 @@ fun Formulario(lista: SnapshotStateList<Persona>,
                     onClick = {
                         lista.add(Persona(nombre.value, seleccion.value, checkedList[0], checkedList[1]))
                         nombre.value=""
+                        seleccion.value = "Hombre"
+                        checkedList[0] = false
+                        checkedList[1] = false
+
                     }
                 ) { Text(text = "Aceptar") } //Al hacer click se guarda ese nombre en el listado
                 //Y se muestra en la caja con la lista de nombres

@@ -55,7 +55,7 @@ fun Botonera2(calculadora: Calculadora, pantalla: MutableState<String>){
             Row {
                 for(j in 1..3){
                     var num = numeros[id]
-                    Button(onClick = {gestionBotones(num, calculadora){pantalla.value=""+num} })
+                    Button(onClick = {gestionBotones(num, calculadora, pantalla)})
                     { Text(text = num) }
                     id++
                 }
@@ -64,7 +64,7 @@ fun Botonera2(calculadora: Calculadora, pantalla: MutableState<String>){
         Row {
             Button(onClick = {calculadora.reset()
                 pantalla.value = "0"}) { Text(text = "C") }
-            Button(onClick = { gestionBotones("0", calculadora){pantalla.value=""+it}})
+            Button(onClick = { gestionBotones("0", calculadora, pantalla)})
             {Text(text = "0")}
             Button(onClick = {pantalla.value = ""+calculadora.resuelveAddOperacion()})
             { Text(text = "=") }
@@ -87,16 +87,16 @@ fun BotonesOperaciones2(calculadora: Calculadora, pantalla: MutableState<String>
     }
 }
 
-fun gestionBotones( s: String, calculadora:Calculadora, cambiaValor:(Double)->Unit) {
+fun gestionBotones( s: String, calculadora:Calculadora, pantalla: MutableState<String>) {
 
     var n = s.toDouble()
     if (calculadora.operacion == "") {
         calculadora.operando1 = (calculadora.operando1 * 10) + n
-        cambiaValor(calculadora.operando1)
+        pantalla.value=""+calculadora.operando1
 
     } else {
         calculadora.operando2 = (calculadora.operando2 * 10) + n
-        cambiaValor(calculadora.operando2)
+        pantalla.value=""+calculadora.operando2
     }
 }
 

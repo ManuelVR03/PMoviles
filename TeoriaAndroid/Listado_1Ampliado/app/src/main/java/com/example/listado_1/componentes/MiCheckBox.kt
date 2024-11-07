@@ -1,4 +1,4 @@
-package com.example.listado_1.componentes
+    package com.example.listado_1.componentes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

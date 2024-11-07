@@ -45,41 +45,91 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Botonera(calculadora: Calculadora, setPantalla: (String) -> Unit ){
+fun Botonera(calculadora: Calculadora, setPantalla: (String) -> Unit) {
     Column {
         Row {
-            Button(onClick = { gestionBotones("7", calculadora){setPantalla(""+it)} }) { Text(text = "7") }
-            Button(onClick = { gestionBotones("8", calculadora){setPantalla(""+it)} })  { Text(text = "8") }
-            Button(onClick = { gestionBotones("9", calculadora){setPantalla(""+it)} })  { Text(text = "9") }
+            Button(onClick = { gestionBotones("7", calculadora) { setPantalla("" +calculadora.operando1) } }) {
+                Text(
+                    text = "7"
+                )
+            }
+            Button(onClick = { gestionBotones("8", calculadora) { setPantalla("8") } }) {
+                Text(
+                    text = "8"
+                )
+            }
+            Button(onClick = { gestionBotones("9", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "9"
+                )
+            }
         }
         Row {
-            Button(onClick = { gestionBotones("4", calculadora){setPantalla(""+it)} })  { Text(text = "4") }
-            Button(onClick = { gestionBotones("5", calculadora){setPantalla(""+it)} })  { Text(text = "5") }
-            Button(onClick = { gestionBotones("6", calculadora){setPantalla(""+it)} })  { Text(text = "6") }
+            Button(onClick = { gestionBotones("4", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "4"
+                )
+            }
+            Button(onClick = { gestionBotones("5", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "5"
+                )
+            }
+            Button(onClick = { gestionBotones("6", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "6"
+                )
+            }
         }
         Row {
-            Button(onClick = { gestionBotones("1", calculadora){setPantalla(""+it)} })  { Text(text = "1") }
-            Button(onClick = { gestionBotones("2", calculadora){setPantalla(""+it)} })  { Text(text = "2") }
-            Button(onClick = { gestionBotones("3", calculadora){setPantalla(""+it)} })  { Text(text = "3") }
+            Button(onClick = { gestionBotones("1", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "1"
+                )
+            }
+            Button(onClick = { gestionBotones("2", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "2"
+                )
+            }
+            Button(onClick = { gestionBotones("3", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "3"
+                )
+            }
         }
         Row {
-            Button(onClick = { calculadora.reset()
-                setPantalla("0")}) { Text(text = "C") }
-            Button(onClick = { gestionBotones("0", calculadora){setPantalla(""+it)} })  { Text(text = "0") }
+            Button(onClick = {
+                calculadora.reset()
+                setPantalla("0")
+            }) { Text(text = "C") }
+            Button(onClick = { gestionBotones("0", calculadora) { setPantalla("" + it) } }) {
+                Text(
+                    text = "0"
+                )
+            }
             Button(onClick = { setPantalla(calculadora.resuelveAddOperacion()) }) { Text(text = "=") }
         }
     }
 }
 
 @Composable
-fun BotoneraOperaciones(calculadora: Calculadora, setPantalla: (String) -> Unit){
+fun BotoneraOperaciones(calculadora: Calculadora, setPantalla: (String) -> Unit) {
     Column {
-        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("suma")) }) {Text(text = "+") }
-        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("resta")) }) {Text(text = "-") }
-        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("multiplica")) }) {Text(text = "*") }
-        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("divide")) }) {Text(text = "/") }
-        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("cuadrado")) }) {Text(text = "^2") }
-        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("raizCuadrada")) }) {Text(text = "sqrt") }
+        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("suma")) }) { Text(text = "+") }
+        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("resta")) }) { Text(text = "-") }
+        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("multiplica")) }) {
+            Text(
+                text = "*"
+            )
+        }
+        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("divide")) }) { Text(text = "/") }
+        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("cuadrado")) }) { Text(text = "^2") }
+        Button(onClick = { setPantalla(calculadora.resuelveAddOperacion("raizCuadrada")) }) {
+            Text(
+                text = "sqrt"
+            )
+        }
     }
 }
 
@@ -87,7 +137,7 @@ fun BotoneraOperaciones(calculadora: Calculadora, setPantalla: (String) -> Unit)
 fun Calculadora(name: String, modifier: Modifier = Modifier) {
 
     var calculadora: Calculadora by remember { mutableStateOf(Calculadora()) }
-    var pantalla: String by remember {mutableStateOf("0")}
+    var pantalla: String by remember { mutableStateOf("0") }
 
     Column {
         Text(
@@ -97,7 +147,7 @@ fun Calculadora(name: String, modifier: Modifier = Modifier) {
                 .fillMaxWidth()
                 .border(BorderStroke(1.dp, Color.Black))
                 .padding(16.dp)
-                .padding(top = 50.dp),textAlign = TextAlign.End
+                .padding(top = 50.dp), textAlign = TextAlign.End
         )
         Row {
             Botonera(calculadora, { nuevaPantalla -> pantalla = nuevaPantalla })
@@ -108,7 +158,7 @@ fun Calculadora(name: String, modifier: Modifier = Modifier) {
 
 }
 
-fun gestionBotones( numBoton: String, calculadora:Calculadora, cambiaValor:(Double)->Unit) {
+fun gestionBotones(numBoton: String, calculadora: Calculadora, cambiaValor: (Double) -> Unit) {
 
     var numPantalla = numBoton.toDouble()
     if (calculadora.operacion == "") {
