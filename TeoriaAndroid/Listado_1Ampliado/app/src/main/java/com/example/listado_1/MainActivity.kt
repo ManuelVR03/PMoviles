@@ -14,6 +14,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.listado_1.componentes.Formulario
 import com.example.listado_1.componentes.Lista
 import com.example.listado_1.modelo.Persona
@@ -47,7 +48,7 @@ fun Main(modifier: Modifier = Modifier) {
 
 
 
-    Column(){
+    Column(modifier.padding(top = 25.dp)){
         Formulario(personas,opciones,seleccion,nombre,opciones2,checkedList)
         Lista(personas)
     }

@@ -15,9 +15,7 @@ fun Lista(listado: SnapshotStateList<Persona>){
         Column(){
             Text(text="Listado de nombres")
             listado.forEachIndexed{ i, persona->
-                Text(text=persona.nombre + " " + persona.sexo)
-                Text(text="Inglés -> " + persona.inglesB2)
-                Text(text="Carnet -> " + persona.carnetB1)
+                Text(text=persona.nombre + " " + persona.sexo + " Inglés -> " + persona.inglesB2 + " Carnet -> " + persona.carnetB1)
             }
 
         }
