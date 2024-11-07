@@ -1,5 +1,6 @@
 package com.example.teoria_examen.formulario
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
@@ -14,7 +15,8 @@ fun MiLista(personas: SnapshotStateList<Persona>){
         Text(text = "Listado: ")
         personas.forEach {
             Text(text = it.nombre + " " + it.apellido + " " + it.sexo
-                    + if (it.carnet) " Permiso B" else{""} + if (it.master) " Master" else "")
+                    + if (it.carnet) " Permiso B" else{""} + if (it.master) " Master" else "",
+                Modifier.clickable{personas.remove(it)})
         }
     }
 }

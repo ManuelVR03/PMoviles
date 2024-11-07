@@ -1,0 +1,5 @@
+interface ISuperpoder {
+
+    fun volar()
+
+}

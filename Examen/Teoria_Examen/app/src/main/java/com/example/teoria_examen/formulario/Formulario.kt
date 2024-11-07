@@ -40,6 +40,7 @@ fun Formulario(personas: SnapshotStateList<Persona>, nombre: MutableState<String
         Spacer(modifier = Modifier.height(10.dp))
         MiCheckBox(checkeds, checkList)
         Spacer(modifier = Modifier.height(10.dp))
+        MiMenuDesplegable(sexos, seleccion)
         Button(onClick = {
             personas.add(
                 Persona
