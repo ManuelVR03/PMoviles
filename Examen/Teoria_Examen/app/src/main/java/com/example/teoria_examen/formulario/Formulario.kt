@@ -46,6 +46,7 @@ fun Formulario(personas: SnapshotStateList<Persona>, nombre: MutableState<String
                 Persona
                     (nombre.value, apellido.value, seleccion.value, checkList[0], checkList[1])
             )
+            Resetea(nombre, apellido, seleccion, checkList)
         })
         { Text(text = "Enviar") }
         Spacer(modifier = Modifier.height(10.dp))
@@ -55,3 +56,11 @@ fun Formulario(personas: SnapshotStateList<Persona>, nombre: MutableState<String
     }
 }
 
+fun Resetea(nombre: MutableState<String>, apellido: MutableState<String>, seleccion: MutableState<String>, checkList: SnapshotStateList<Boolean>){
+    nombre.value = ""
+    apellido.value = ""
+    seleccion.value = "Hombre"
+    for (i in checkList.indices)
+        checkList[i] = false
+    // checkList.fill(false)
+}
